@@ -63,7 +63,35 @@
     </header>
 
     <div class="container">
-        <a href="add_employee.php" class="btn btn-primary mb-3">Add Employee</a>
+        <!-- Button to trigger modal -->
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+            Add Employee
+        </button>
+
+        <!-- Modal for adding employee -->
+        <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Form to add employee -->
+                        <form action="process_add_employee.php" method="POST">
+                            <div class="mb-3">
+                                <label for="empName" class="form-label">Employee Name</label>
+                                <input type="text" class="form-control" id="empName" name="emp_name" required>
+                            </div>
+                            <!-- Add more fields as needed -->
+                            <button type="submit" class="btn btn-primary">Add Employee</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="container">
         <a href="../index.php" class="btn btn-danger mb-3">Log Out</a>
         <?php
             // Database connection
