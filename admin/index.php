@@ -186,7 +186,6 @@
                     echo "<td>".$row['emp_id']."</td>";
                     echo "<td>".$row['emp_name']."</td>";
                     echo "<td><button type='button' class='btn btn-info btn-sm view-details-btn' data-bs-toggle='modal' data-bs-target='#viewEmployeeModal' data-id='".$row['emp_id']."'>View Details</button> ";
-                    echo "<a href='add_incentive.php?id=".$row['emp_id']."' class='btn btn-success btn-sm'>Add Incentive</a> ";
                     echo "<a href='delete_employee.php?id=".$row['emp_id']."' class='btn btn-danger btn-sm'>Delete</a></td>";
                     echo "</tr>";
                 }
