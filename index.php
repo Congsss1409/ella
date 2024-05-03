@@ -1,13 +1,12 @@
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LOGIN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="sweetalert2.all.min.js"></script>
     <style>
         body {
             background-image: url('bg.jpg');
@@ -21,66 +20,69 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-attachment: fixed;
         }
-        .registration-container {
-            background-color: rgba(255, 255, 255, 0.5); ;
-            padding: 50px;
-            border-radius: 5px;
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         .form-group label {
-            display: block;
-            margin-bottom: 5px;
+            font-weight: bold;
         }
         .form-group input[type="text"],
         .form-group input[type="password"],
         .form-group input[type="email"] {
             width: 100%;
-            padding: 8px;
-            border-radius: 10px;
+            padding: 10px;
+            border-radius: 5px;
             border: 1px solid #ccc;
         }
         .form-group input[type="submit"] {
-            background-color: purple;
+            background-color: #007bff;
             color: #fff;
             border: none;
             padding: 10px 20px;
-            border-radius: 3px;
+            border-radius: 5px;
             cursor: pointer;
         }
         .form-group input[type="submit"]:hover {
-            background-color: crimson;
+            background-color: #0056b3;
         }
         .form-links {
             margin-top: 10px;
         }
         .form-links a {
-            margin-right: 10px;
             text-decoration: none;
-            color: ;
+            color: #007bff;
+        }
+        .logo{
+            display:block;
+            align-items: center;
+            margin-left: 65px;
         }
     </style>
 </head>
 <body>
-<div class="registration-container">
-    <h2><b>LOGIN</h2></b>
-    <?php
+<div class="login-container">
+<?php
     $email = $password = "";
     $emailErr = $passwordErr = "";
 
     if($_SERVER['REQUEST_METHOD']=="POST"){
         if(empty($_POST["email"])){
-            $emailErr = "Email is Required";
+            $emailErr = "Email is required";
         } else {
             $email = $_POST["email"];
         }
 
         if(empty($_POST["password"])){
-            $passwordErr = "Password is Required";
+            $passwordErr = "Password is required";
         } else {
             $password = $_POST["password"];
         }
@@ -95,25 +97,29 @@
                     $db_account_type = $row["account_type"];
                     if($db_password === $password){
                         if($db_account_type == "1"){
-                            // Admin login
+                            echo "<script src='sweetalert2.all.min.js'></script>";
                             echo "<script>
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Login Successful!',
-                                        text: 'Redirecting to Admin Dashboard...'
-                                    }).then((result) => {
-                                        window.location.href = 'admin/index.php';
+                                        text: 'Logging in as Admin...',
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    }).then(() => {
+                                        window.location.href = 'admin';
                                     });
                                   </script>";
                         } else {
-                            // User login
+                            echo "<script src='sweetalert2.all.min.js'></script>";
                             echo "<script>
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Login Successful!',
-                                        text: 'Redirecting to User Dashboard...'
-                                    }).then((result) => {
-                                        window.location.href = 'user/dashboard.php';
+                                        text: 'Logging in as User...',
+                                        showConfirmButton: false,
+                                        timer: 3000
+                                    }).then(() => {
+                                        window.location.href = 'user';
                                     });
                                   </script>";
                         }
@@ -122,30 +128,33 @@
                     }
                 }
             } else {
-                $emailErr = "Email is not Registered";
+                $emailErr = "Email is not registered";
             }
         }
     }
 ?>
-    <form method="POST" action="<?php htmlspecialchars("PHP_SELF");?>">
+<img src="bomba.png" height="150" class="logo">
+    
+    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email" value="<?php echo $email; ?>"><br>
-            <span class="error" style='color: red;'><?php echo $emailErr; ?></span>
+            <input type="text" id="email" name="email" value="<?php echo $email; ?>" class="form-control">
+            <span class="text-danger"><?php echo $emailErr; ?></span>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" value="<?php echo $password; ?>"><br>
-            <span class="error" style='color: red;'><?php echo $passwordErr; ?></span>
+            <input type="password" id="password" name="password" class="form-control">
+            <span class="text-danger"><?php echo $passwordErr; ?></span>
         </div> 
         <div class="form-group">
-            <input type="submit" value="Login " class="btn btn-primary">
+            <input type="submit" value="Login" class="btn btn-primary btn-block">
         </div>
     </form>
-    <div class="form-links">
-        <a href="register.php" class="btn btn-link">No account yet? Register</a>
+    <div class="form-links text-center">
+        <a href="register.php">No account yet? Register</a>
     </div>
 </div>
-<script src="bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="bootstrap.bundle.min.js"></script> 
 </body>
 </html>
