@@ -119,7 +119,7 @@
                                         showConfirmButton: false,
                                         timer: 3000
                                     }).then(() => {
-                                        window.location.href = 'user';
+                                        window.location.href = 'user/dashboard.php';
                                     });
                                   </script>";
                         }
