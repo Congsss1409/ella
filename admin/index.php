@@ -198,7 +198,7 @@
             mysqli_close($conn);
         ?>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jquery-3.6.0.min.js"></script>
     <script src="bootstrap.bundle.min.js"></script>
     <script>
     // JavaScript to load employee details dynamically when modal is shown
